@@ -1,0 +1,23 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "advanced hangman",
+  "main": "hangman.js",
+  "dependencies": {
+    "inquirer": "^3.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brnjin/Advanced-js-Hangman.git"
+  },
+  "author": "Brian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brnjin/Advanced-js-Hangman/issues"
+  },
+  "homepage": "https://github.com/brnjin/Advanced-js-Hangman#readme"
+}
