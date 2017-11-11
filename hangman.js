@@ -1,26 +1,38 @@
+//Node package 
 var inquirer = require("inquirer");
-// var blankedOutWord = require("./letters.js");
 var numberGuesses = 6;
+//Setting variable to import specific data
 var importedWord = require("./letters.js");
+//Imports word solution
 var answerWord = importedWord.randomWord
+//Blanked out word user is trying to guess
 var blankedOutWord = importedWord.blankedOutWord
+//holds all the wrong letters
 var wrongLetters = [];
+//turns the answer word into array 
 var arrAnswerWord= [];
 var letterCounter = 0;
+//Combines all the correct guesses
 var updatedWordWithGuesses = [];
 
-
-gameSetup()
+//start of the game
 function gameSetup (){
+	//reset number of guesses
 	numberGuesses = 6;
+	//turns answer word into array and stores in global variable arrAnswerWord
 	arrAnswerWord= answerWord.split("");
 	letterCounter = arrAnswerWord.length;
+	//Displays how many characters the user is trying to guess
 	console.log(blankedOutWord)
+	//resets the guessed word
 	updatedWordWithGuesses = [];
+	//resets the user's wrong letters 
 	wrongLetters = [];
+	//loop to change array of answerword into blanks
 	for (var i = 0; i < letterCounter; i++){
-		updatedWordWithGuesses.push("_");
+		updatedWordWithGuesses.push(" _ ");
 	}
+	//invoke inquirer questions
 	askquestions();
 }
 function askquestions (){
@@ -29,10 +41,7 @@ function askquestions (){
 		name: "userGuess",
 		message: "Guess a letter!"
 	}).then(function(guess) {
-		matchLetter(guess.userGuess);
-
-/*		var guessedLetter = new Letter(guess.userGuess);*/
-
+			matchLetter(guess.userGuess);
 	});
 }
 
@@ -50,22 +59,34 @@ function matchLetter(letter) {
 				updatedWordWithGuesses[j] = letter
 			}
 		}
-		console.log("\x1b[32m%s\x1b[0m", "CORRECT!!!");
-		console.log(updatedWordWithGuesses);
+		console.log("\n\x1b[32m%s\x1b[0m", "CORRECT!!!");
+		console.log("\n" + updatedWordWithGuesses.join("") + "\n");
+		askquestions();
+		endGame();
 	}
 	else{
 		wrongLetters.push(letter);
 		numberGuesses--;
-		console.log(numberGuesses)
-		console.log("\x1b[31m%s\x1b[0m", "INCORRECT!!!");
+		console.log("\n\x1b[31m%s\x1b[0m", "INCORRECT!!!");
+		console.log("\n" + numberGuesses + " guesses remaining!");
+		console.log("\nLetters guessed: " + wrongLetters);
+		console.log("\n" + updatedWordWithGuesses.join("") + "\n");
+		askquestions();
+		endGame();
 	}
 }
 
+function endGame() {
+	if (updatedWordWithGuesses.toString() === answerWord) {
+		console.log("You Won!");
+		console.log("New game has started");
+		gameSetup();
+	}
+	else if (numberGuesses === 0) {
+		console.log("You blew it! Thats it man, it's all over!")
+		console.log("New game, New you. Good Luck, better not fail this time.")
+		gameSetup();
+	}
+}
 
-
-
-//change words into blanks
-//number of wrongs counter
-//if win, start a new game
-//if loss, start a new game
-//If total loss, ask to play again
+gameSetup();

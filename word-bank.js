@@ -1,13 +1,13 @@
 //constructor for word
 function Word () {
 	this.animalChoices = [
-	"turtle",
-	"moose",
+	"pigeon",
+	"cow",
 	"cat",
 	"dog",
 	"monkey",
-	"giraffe",
-	"flying squirrel"];
+	"bird",
+	"snake"];
 	//Gives random word from animalChoices
 	this.answerWord = function(){
 		var randomWord = this.animalChoices[Math.floor(Math.random() 
