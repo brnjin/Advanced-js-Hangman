@@ -8,15 +8,16 @@ function Word () {
 	"monkey",
 	"giraffe",
 	"flying squirrel"];
+	//Gives random word from animalChoices
 	this.answerWord = function(){
-		console.log( animalChoices[Math.floor(Math.random()*animalChoices.length)]);
+		var randomWord = this.animalChoices[Math.floor(Math.random() 
+			* this.animalChoices.length)];
+		return randomWord
 	};
-	console.log(this.answerWord());
-//used to create an object repsenting the current word 
-// it should contain specific logic and data
 };
+//Involking the answerWord function inside the Word constructor
+var word = new Word().answerWord();
 
-Word.prototype.randomWord = function(){
-	return answerWord();
-};
-module.exports = Word;
+
+//Export to letter.js and hangman.js
+module.exports = word;
