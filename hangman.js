@@ -42,17 +42,21 @@ function askquestions (){
 		message: "Guess a letter!"
 	}).then(function(guess) {
 			matchLetter(guess.userGuess);
+			endGame();
 	});
 }
 
+//Goes through and replaces the correct letter in the right position
 function matchLetter(letter) {
 	var matched = false;
 
 	for (var i = 0; i < letterCounter; i++) {
 		if(answerWord[i] === letter ) {
+			//Changes matched to true if the answerWord contains letter
 			matched = true;
 		}
 	}
+	//Once matched is true, it loops through to the occurance of the letter and replaces 
 	if (matched) {
 		for (var j = 0; j < letterCounter; j++) {
 			if (answerWord[j] === letter) {
@@ -61,18 +65,20 @@ function matchLetter(letter) {
 		}
 		console.log("\n\x1b[32m%s\x1b[0m", "CORRECT!!!");
 		console.log("\n" + updatedWordWithGuesses.join("") + "\n");
-		askquestions();
 		endGame();
+		askquestions();
 	}
 	else{
 		wrongLetters.push(letter);
+		//Subtracts every time user gets the letter incorrectly
 		numberGuesses--;
 		console.log("\n\x1b[31m%s\x1b[0m", "INCORRECT!!!");
 		console.log("\n" + numberGuesses + " guesses remaining!");
 		console.log("\nLetters guessed: " + wrongLetters);
 		console.log("\n" + updatedWordWithGuesses.join("") + "\n");
-		askquestions();
 		endGame();
+		askquestions();
+
 	}
 }
 
@@ -83,10 +89,13 @@ function endGame() {
 		gameSetup();
 	}
 	else if (numberGuesses === 0) {
-		console.log("You blew it! Thats it man, it's all over!")
-		console.log("New game, New you. Good Luck, better not fail this time.")
+		console.log("\nYou blew it! Thats it man, it's all over!")
+		console.log("\nGood Luck, better not fail this time.")
 		gameSetup();
 	}
 }
 
 gameSetup();
+
+//It is giving the same word if the user starts a new game without exiting the game
+//I would 
